@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doom Team — El Régimen de Doom</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #0d2e1a 0%, #020805 80%);
+      color: #e6f5ec;
+      min-height: 100vh;
+      padding: 28px 20px 60px;
+    }
+
+    .contenedor {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .barra-superior {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      padding-bottom: 18px;
+      margin-bottom: 36px;
+      border-bottom: 1px solid #164a2b;
+    }
+
+    .btn-nav {
+      text-decoration: none;
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border-radius: 5px;
+      background-color: #071a10;
+      color: #8ce8b2;
+      border: 1px solid #1f6e3f;
+      transition: all 0.25s ease;
+    }
+
+    .btn-nav:hover {
+      background-color: #00ff66;
+      color: #020805;
+      border-color: #00ff66;
+      box-shadow: 0 0 14px rgba(0, 255, 102, 0.35);
+    }
+
+    .encabezado {
+      text-align: center;
+      margin-bottom: 44px;
+    }
+
+    .etiqueta {
+      color: #00ff66;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .encabezado h1 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      background: linear-gradient(180deg, #ffffff 15%, #52b788 60%, #0a5c2b 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 14px rgba(0, 255, 102, 0.25));
+      margin-bottom: 8px;
+    }
+
+    .encabezado p {
+      color: #8cb39c;
+      font-size: 15px;
+    }
+
+    .grid-villanos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 28px;
+    }
+
+    .tarjeta-villano {
+      background-color: #06140c;
+      border: 1px solid #164a2b;
+      border-radius: 10px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .tarjeta-villano:hover {
+      transform: translateY(-6px);
+      border-color: #00ff66;
+      box-shadow: 0 12px 26px rgba(0, 255, 102, 0.16);
+    }
+
+    .marco-img {
+      width: 150px;
+      height: 180px;
+      background-color: #020704;
+      border: 2px solid #1f7341;
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .marco-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .btn-switch-forma {
+      margin-bottom: 16px;
+      padding: 7px 14px;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      border-radius: 5px;
+      background-color: #092415;
+      color: #7ef9a9;
+      border: 1px solid #00ff66;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-switch-forma:hover {
+      background-color: #00ff66;
+      color: #020805;
+      box-shadow: 0 0 12px rgba(0, 255, 102, 0.4);
+    }
+
+    .nombre-villano {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #7ef9a9;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .lore {
+      color: #b7d4c3;
+      font-size: 14.5px;
+      line-height: 1.65;
+      text-align: left;
+    }
+
+    .lore p {
+      margin-bottom: 10px;
+    }
+
+    .lore p:last-child {
+      margin-bottom: 0;
+    }
+
+    .cita-doom {
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-left: 3px solid #00ff66;
+      background-color: rgba(0, 255, 102, 0.06);
+      color: #9efbc0;
+      font-style: italic;
+      font-weight: 600;
+    }
+
+    /* EFECTO GLITCH */
+    .glitch {
+      position: relative;
+      display: inline-block;
+      font-weight: 800;
+      color: #00ff66;
+      word-break: break-all;
+      animation: glitch-skew 2.2s infinite linear alternate-reverse;
+    }
+
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .glitch::before {
+      left: 2px;
+      text-shadow: -2px 0 #00ff66;
+      clip-path: inset(0 0 55% 0);
+      animation: glitch-anim-1 2s infinite linear alternate-reverse;
+    }
+
+    .glitch::after {
+      left: -2px;
+      text-shadow: 2px 0 #15803d;
+      clip-path: inset(50% 0 0 0);
+      animation: glitch-anim-2 1.7s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitch-anim-1 {
+      0% { clip-path: inset(10% 0 75% 0); transform: translate(-2px, -1px); }
+      25% { clip-path: inset(55% 0 20% 0); transform: translate(2px, 1px); }
+      50% { clip-path: inset(25% 0 50% 0); transform: translate(-1px, 2px); }
+      75% { clip-path: inset(75% 0 5% 0); transform: translate(2px, -2px); }
+      100% { clip-path: inset(15% 0 65% 0); transform: translate(-2px, 1px); }
+    }
+
+    @keyframes glitch-anim-2 {
+      0% { clip-path: inset(65% 0 15% 0); transform: translate(2px, 1px); }
+      25% { clip-path: inset(15% 0 60% 0); transform: translate(-2px, -1px); }
+      50% { clip-path: inset(80% 0 5% 0); transform: translate(1px, -2px); }
+      75% { clip-path: inset(30% 0 45% 0); transform: translate(-2px, 2px); }
+      100% { clip-path: inset(60% 0 20% 0); transform: translate(2px, -1px); }
+    }
+
+    @keyframes glitch-skew {
+      0%, 90%, 100% { transform: skewX(0deg); }
+      92% { transform: skewX(7deg); }
+      95% { transform: skewX(-7deg); }
+      98% { transform: skewX(4deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="contenedor">
+    <nav class="barra-superior">
+      <a href="index.html" class="btn-nav">← Inicio</a>
+      <a href="heroes.html" class="btn-nav">Ir a Heroes Team →</a>
+    </nav>
+
+    <header class="encabezado">
+      <div class="etiqueta">Supremacía Multiversal</div>
+      <h1>Doom Team</h1>
+      <p>Los ejecutores del nuevo orden bajo el dominio de Doom</p>
+    </header>
+
+    <main class="grid-villanos">
+
+      <!-- DOCTOR DOWN -->
+      <article class="tarjeta-villano">
+        <div class="marco-img">
+          <img src="imagenes/Doom.png" alt="Doctor Down" />
+        </div>
+        <h2 class="nombre-villano">DOCTOR DOWN</h2>
+        <div class="lore">
+          <p>El genio más grande conocido, él antes era amable, cariñoso, pero por culpa <span class="glitch" data-text="------------------------------------------">------------------------------------------</span></p>
+          <p>lo perdió todo, ese futuro brillante se llenó de rosas con espinas que le recordaban su perpetua agonía.</p>
+          <p>Ahora que perdió todo, él hará que todos devuelvan aquellos futuros que nunca debieron tener.</p>
+          <p class="cita-doom">"Los susti me abodecen a mi,por que yo soy doom"</p>
+        </div>
+      </article>
+
+      <!-- MYKICKASS / VALENHULK -->
+      <article class="tarjeta-villano">
+        <div class="marco-img">
+          <img id="img-doctor-hulk" src="imagenes/doctor.png" alt="MyKickAss" />
+        </div>
+        <button id="btn-alternar-forma" class="btn-switch-forma" type="button">
+          Cambiar a ValenHULK →
+        </button>
+        <h2 id="nombre-doctor-hulk" class="nombre-villano">MyKickAss</h2>
+        <div class="lore">
+          <p>Prodigioso doctor, que debido a sus intensas horas de jugar Valorant le causó un trastorno de doble personalidad por el enojo que le causaba perder su partida de ranked.</p>
+          <p>Gracias a una tecnología avanzada lograron crear un controlador para su trastorno de ira.</p>
+          <p>Pero debido a que Serrucho-Man provocó a que su controlador falle, por esto él mismo se encerró en un tambo, pero no esperaba que Doom lo secuestrara para sus planes.</p>
+        </div>
+      </article>
+
+      <!-- SERRUCHO MAN -->
+      <article class="tarjeta-villano">
+        <div class="marco-img">
+          <img src="imagenes/Serrucho.png" alt="Serrucho Man" />
+        </div>
+        <h2 class="nombre-villano">Serrucho Man</h2>
+        <div class="lore">
+          <p>Luego de aceptar que su amor platónico Camila MJ no volverá, enfrentó una nueva etapa de autosuperación.</p>
+          <p>Usando sus redes de vóley protegía la ciudad.</p>
+          <p>Pero tras su patrullaje matutino, un portal lo arrastró, donde Doom le ofreció un poder para poder volver con su amada, a cambio de su ayuda.</p>
+        </div>
+      </article>
+
+    </main>
+  </div>
+
+  <script>
+    const btnForma = document.getElementById("btn-alternar-forma");
+    const imgForma = document.getElementById("img-doctor-hulk");
+    const nombreForma = document.getElementById("nombre-doctor-hulk");
+
+    let esHulk = false;
+
+    btnForma.addEventListener("click", () => {
+      esHulk = !esHulk;
+
+      if (esHulk) {
+        imgForma.src = "imagenes/Hulk.png";
+        imgForma.alt = "ValenHULK";
+        nombreForma.textContent = "ValenHULK";
+        btnForma.textContent = "Cambiar a MyKickAss →";
+      } else {
+        imgForma.src = "imagenes/doctor.png";
+        imgForma.alt = "MyKickAss";
+        nombreForma.textContent = "MyKickAss";
+        btnForma.textContent = "Cambiar a ValenHULK →";
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Heroes Team — El Régimen de Doom</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #0d2e1a 0%, #020805 80%);
+      color: #e6f5ec;
+      min-height: 100vh;
+      padding: 28px 20px 60px;
+    }
+
+    .contenedor {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .barra-superior {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      padding-bottom: 18px;
+      margin-bottom: 36px;
+      border-bottom: 1px solid #164a2b;
+    }
+
+    .btn-nav {
+      text-decoration: none;
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border-radius: 5px;
+      background-color: #071a10;
+      color: #8ce8b2;
+      border: 1px solid #1f6e3f;
+      transition: all 0.25s ease;
+    }
+
+    .btn-nav:hover {
+      background-color: #00ff66;
+      color: #020805;
+      border-color: #00ff66;
+      box-shadow: 0 0 14px rgba(0, 255, 102, 0.35);
+    }
+
+    .encabezado {
+      text-align: center;
+      margin-bottom: 44px;
+    }
+
+    .etiqueta {
+      color: #00ff66;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .encabezado h1 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      background: linear-gradient(180deg, #ffffff 15%, #52b788 60%, #0a5c2b 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 14px rgba(0, 255, 102, 0.25));
+      margin-bottom: 8px;
+    }
+
+    .encabezado p {
+      color: #8cb39c;
+      font-size: 15px;
+    }
+
+    .grid-heroes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 28px;
+    }
+
+    .tarjeta-heroe {
+      background-color: #06140c;
+      border: 1px solid #164a2b;
+      border-radius: 10px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .tarjeta-heroe:hover {
+      transform: translateY(-6px);
+      border-color: #00ff66;
+      box-shadow: 0 12px 26px rgba(0, 255, 102, 0.16);
+    }
+
+    .marco-img {
+      width: 150px;
+      height: 180px;
+      background-color: #020704;
+      border: 2px solid #1f7341;
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+
+    .marco-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .nombre-heroe {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #7ef9a9;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .lore {
+      color: #b7d4c3;
+      font-size: 14.5px;
+      line-height: 1.65;
+      text-align: left;
+    }
+
+    .lore p {
+      margin-bottom: 10px;
+    }
+
+    .lore p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* EFECTO GLITCH GENERAL */
+    .glitch {
+      position: relative;
+      display: inline-block;
+      font-weight: 800;
+      color: #7ef9a9;
+      animation: glitch-skew 2.4s infinite linear alternate-reverse;
+    }
+
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .glitch::before {
+      left: 2px;
+      text-shadow: -2px 0 #00ff66;
+      clip-path: inset(0 0 55% 0);
+      animation: glitch-anim-1 2.2s infinite linear alternate-reverse;
+    }
+
+    .glitch::after {
+      left: -2px;
+      text-shadow: 2px 0 #15803d;
+      clip-path: inset(50% 0 0 0);
+      animation: glitch-anim-2 1.8s infinite linear alternate-reverse;
+    }
+
+    /* EFECTO GLITCH EN VERDE OSCURO */
+    .glitch-verde-oscuro {
+      position: relative;
+      display: inline-block;
+      font-weight: 800;
+      color: #166534;
+      text-shadow: 0 0 8px rgba(22, 101, 52, 0.65);
+      animation: glitch-skew 2.6s infinite linear alternate-reverse;
+    }
+
+    .glitch-verde-oscuro::before,
+    .glitch-verde-oscuro::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .glitch-verde-oscuro::before {
+      left: 2px;
+      color: #052e16;
+      text-shadow: -2px 0 #0f5132;
+      clip-path: inset(0 0 50% 0);
+      animation: glitch-anim-1 2s infinite linear alternate-reverse;
+    }
+
+    .glitch-verde-oscuro::after {
+      left: -2px;
+      color: #14532d;
+      text-shadow: 2px 0 #064e3b;
+      clip-path: inset(45% 0 0 0);
+      animation: glitch-anim-2 2.4s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitch-anim-1 {
+      0% { clip-path: inset(10% 0 75% 0); transform: translate(-2px, -1px); }
+      25% { clip-path: inset(55% 0 20% 0); transform: translate(2px, 1px); }
+      50% { clip-path: inset(25% 0 50% 0); transform: translate(-1px, 2px); }
+      75% { clip-path: inset(75% 0 5% 0); transform: translate(2px, -2px); }
+      100% { clip-path: inset(15% 0 65% 0); transform: translate(-2px, 1px); }
+    }
+
+    @keyframes glitch-anim-2 {
+      0% { clip-path: inset(65% 0 15% 0); transform: translate(2px, 1px); }
+      25% { clip-path: inset(15% 0 60% 0); transform: translate(-2px, -1px); }
+      50% { clip-path: inset(80% 0 5% 0); transform: translate(1px, -2px); }
+      75% { clip-path: inset(30% 0 45% 0); transform: translate(-2px, 2px); }
+      100% { clip-path: inset(60% 0 20% 0); transform: translate(2px, -1px); }
+    }
+
+    @keyframes glitch-skew {
+      0%, 90%, 100% { transform: skewX(0deg); }
+      92% { transform: skewX(7deg); }
+      95% { transform: skewX(-7deg); }
+      98% { transform: skewX(4deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="contenedor">
+    <nav class="barra-superior">
+      <a href="index.html" class="btn-nav">← Inicio</a>
+      <a href="villanos.html" class="btn-nav">Ir a Doom Team →</a>
+    </nav>
+
+    <header class="encabezado">
+      <div class="etiqueta">Archivos de Resistencia</div>
+      <h1>Heroes Team</h1>
+      <p>Sobrevivientes y anomalías frente al régimen de Doom</p>
+    </header>
+
+    <main class="grid-heroes">
+
+      <!-- CAPITAN CHAT GPT -->
+      <article class="tarjeta-heroe">
+        <div class="marco-img">
+          <img src="imagenes/Capitan.png" alt="Capitan Chat GPT" />
+        </div>
+        <h2 class="nombre-heroe">CAPITAN CHAT GPT</h2>
+        <div class="lore">
+          <p>Héroe que se creía muerto luego de ser descubierto copiando el examen, pero gracias a los viajes en el tiempo ese <span class="glitch" data-text='"error fue corregido"'>"error fue corregido"</span>.</p>
+          <p>Debido a interferir en el perpetuo ciclo de la FIS, debió ser reubicado a otra facultad, a Civil.</p>
+          <p>Pero debido a una gran amenaza deberá volver a usar a su fiel amigo, la IA.</p>
+        </div>
+      </article>
+
+      <!-- CYCLOIDE (CURWEN) -->
+      <article class="tarjeta-heroe">
+        <div class="marco-img">
+          <img src="imagenes/curwen.png" alt="Cycloide (Curwen)" />
+        </div>
+        <h2 class="nombre-heroe">CYCLOIDE (CURWEN)</h2>
+        <div class="lore">
+          <p>Sobrevivió a varios parciales y sustis, causados por el error de Capitán Chat GPT.</p>
+          <p>Ahora mismo luego de terminar su relación, lo único que le importa es sobrevivir los parciales.</p>
+        </div>
+      </article>
+
+      <!-- MR.VALORANT -->
+      <article class="tarjeta-heroe">
+        <div class="marco-img">
+          <img src="imagenes/Raizen.png" alt="Mr.Valorant" />
+        </div>
+        <h2 class="nombre-heroe">MR.VALORANT</h2>
+        <div class="lore">
+          <p>Traído directamente de la facultad de Civil.</p>
+          <p>Está enterado de los viajes interfacultades que hizo Capitán IA, y cómo esto repercutió en todas las ramas facultacionales.</p>
+          <p>Intenta solucionar esto con ayuda de su amigo ----<span class="glitch-verde-oscuro" data-text='"archivo no encontrado"'>"archivo no encontrado"</span></p>
+        </div>
+      </article>
+
+    </main>
+  </div>
+
+</body>
+</html>

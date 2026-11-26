@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Empieza el Régimen de Doom</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at center, #0e331d 0%, #020805 80%);
+      color: #e6f5ec;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .simbolo-logo {
+      width: 160px;
+      height: auto;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 0 18px rgba(0, 255, 102, 0.45));
+      animation: flotar 3.5s ease-in-out infinite;
+    }
+
+    @keyframes flotar {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .etiqueta {
+      color: #00ff66;
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .titulo-principal {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      background: linear-gradient(180deg, #ffffff 15%, #52b788 60%, #0a5c2b 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 16px rgba(0, 255, 102, 0.3));
+      margin-bottom: 16px;
+    }
+
+    .descripcion {
+      max-width: 540px;
+      color: #8fb39e;
+      font-size: 16px;
+      margin-bottom: 40px;
+      line-height: 1.5;
+    }
+
+    .botones {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-bando {
+      text-decoration: none;
+      padding: 16px 36px;
+      font-size: 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border-radius: 6px;
+      transition: all 0.25s ease;
+    }
+
+    .btn-heroes {
+      background-color: #072219;
+      color: #5ef2c8;
+      border: 2px solid #1fa882;
+    }
+
+    .btn-heroes:hover {
+      background-color: #1fa882;
+      color: #020805;
+      box-shadow: 0 0 20px rgba(31, 168, 130, 0.5);
+      transform: translateY(-3px);
+    }
+
+    .btn-doom {
+      background-color: #092914;
+      color: #00ff66;
+      border: 2px solid #00ff66;
+    }
+
+    .btn-doom:hover {
+      background-color: #00ff66;
+      color: #020805;
+      box-shadow: 0 0 20px rgba(0, 255, 102, 0.5);
+      transform: translateY(-3px);
+    }
+  </style>
+</head>
+<body>
+
+  <img src="imagenes/simbolo.png" alt="Símbolo Doomsday" class="simbolo-logo" />
+
+  <div class="etiqueta">Nueva Era</div>
+  <h1 class="titulo-principal">Empieza el Régimen de Doom</h1>
+  <p class="descripcion">
+    El multiverso se inclina ante una sola voluntad. Selecciona tu facción para acceder a los archivos de combate.
+  </p>
+
+  <div class="botones">
+    <a href="heroes.html" class="btn-bando btn-heroes">Heroes Team</a>
+    <a href="villanos.html" class="btn-bando btn-doom">Doom Team</a>
+  </div>
+
+</body>
+</html>
